@@ -1,15 +1,15 @@
 def stock_picker(prices)
 	
-	puts Array(prices).class
+	puts '[ ' + prices.join(' ') + ' ]'
 
 	if prices.length <= 0
 		puts "need more to input days+prices!!"
-		return nill #need a return value
+		#return nill #need a return value
 	end
 
 	if prices.length < 2
 		puts "need more stock prices for later days!!"
-		return nill #need a return value
+		#return nill #need a return value
 	end
 
 	current_best_profit = prices[1] - prices[0]
@@ -25,7 +25,11 @@ def stock_picker(prices)
 		end
 	end
 
-	return current_best_dates.join('')
+	#return current_best_dates.join(' ')
+	return '[ ' + current_best_dates.join(' ') + ' ] ' + 'for a profit of : ' + current_best_profit.to_s 
 end
 
+puts 'test 1'
 puts stock_picker([17,3,6,9,15,8,6,1,10])
+puts 'test 2'
+puts stock_picker([44,42,4,5,42,2,40,5])
