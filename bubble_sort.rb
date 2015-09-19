@@ -19,6 +19,8 @@ end
 
 
 my_array = [4,3,78,2,0,2]
+#my_array = [1,2,3,4]
+
 puts "BEFORE bubble_sort is called, the array is #{my_array}"
 
 bubble_sort(my_array)
