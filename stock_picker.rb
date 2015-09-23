@@ -1,5 +1,7 @@
 def stock_picker(prices)
 	
+	#vim comment
+
 	puts '[ ' + prices.join(' ') + ' ]'
 
 	if prices.length <= 0
