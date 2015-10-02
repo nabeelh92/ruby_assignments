@@ -40,9 +40,9 @@ module TicTacToe
 
 		def winner?
       		winning_positions.each do |winning_position|
-        	next if winning_position_values(winning_position).all_empty?
-        	return true if winning_position_values(winning_position).all_same?
-      	end
+        		next if winning_position_values(winning_position).all_empty?
+        		return true if winning_position_values(winning_position).all_same?
+      		end
       		false
     	end
 
