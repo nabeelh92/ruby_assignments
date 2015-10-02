@@ -22,7 +22,11 @@ module TicTacToe
   			false
 		end
 
-		
+		def formatted_grid
+      		grid.each do |row|
+        		puts row.map { |cell| cell.value.empty? ? "_" : cell.value }.join(" ")
+      		end
+    	end
 
 		private
 
@@ -50,7 +54,7 @@ module TicTacToe
 		def winning_positions
 			grid + # rows
 			grid.transpose + # columns
-			diagnonals # two diagonals
+			diagonals # two diagonals
 		end
 
 		def diagonals 
