@@ -16,8 +16,31 @@ class MicroBlogger
 	  end
 	end
 
+	def dm(target, message)
+		puts "Trying to send #{target} this message:"
+		puts message
+		message = "d @#{target} #{message}"
+		tweet(message)
+	end
+
 	def run
 		puts "Welcome to the JSL Twitter Client!"
+		command = ""
+		while command != "q" 
+			printf "enter command: "
+			input = gets.chomp
+			parts = input.split(" ")
+			command = parts[0]
+
+			case command
+			  when 'q' then puts "Goodbye!"
+			  when 't' then tweet(parts[1..-1].join(" "))
+			  when 'dm' then dm(parts[1], parts[2..-1].joing(" "))
+			  else
+			  	puts "Sorry I dont know how to do #{command}"
+			end
+
+		end
 	end
 end
 
