@@ -48,6 +48,7 @@ class MicroBlogger
 		friends.each do |friend|
 		  timestamp = friend.status.creadted_at
 		  puts "#{friend.screen_name.upcase} (#{timestamp.strftime("%b %d")}): #{friend.status.text}"
+		  puts "\n"
 		end
 	end
 
@@ -65,7 +66,7 @@ class MicroBlogger
 			  when 't' then tweet(parts[1..-1].join(" "))
 			  when 'dm' then dm(parts[1], parts[2..-1].join(" "))
 			  when 'spam' then spam_my_followers(parts[1..-1].join(" "))
-			  when 'etl' then everyone_last_tweet
+			  when 'elt' then everyone_last_tweet
 			  else
 			  	puts "Sorry I dont know how to do #{command}"
 			end
