@@ -13,14 +13,42 @@ class MicroBlogger
 	    puts "ERROR, you message has to be 140 characters or less"
 	  else	
 		@client.update(message)
+		puts "message posted successfully!"
 	  end
 	end
 
 	def dm(target, message)
 		puts "Trying to send #{target} this message:"
 		puts message
-		message = "d @#{target} #{message}"
-		tweet(message)
+
+		screen_names = @client.followers.map { |follower| follower.screen_name }
+		if screen_names.include?(target)
+		  message = "d #{target} #{message}"
+		  tweet(message)
+		else
+		  puts "ERROR, can only send direct messages to followers."
+		end
+	end
+
+	# returns list of your followers
+	def followers_list
+	    screen_names = []
+	    @client.followers.each { |follower| screen_names << follower['screen_name'] }
+	    screen_names
+	end
+
+
+	def spam_my_followers(message)
+		list = followers_list
+		list.each { |f| dm(f, message)}
+	end
+
+	def everyone_last_tweet
+		friends = @client.friends
+		friends.each do |friend|
+		  timestamp = friend.status.creadted_at
+		  puts "#{friend.screen_name.upcase} (#{timestamp.strftime("%b %d")}): #{friend.status.text}"
+		end
 	end
 
 	def run
@@ -35,7 +63,9 @@ class MicroBlogger
 			case command
 			  when 'q' then puts "Goodbye!"
 			  when 't' then tweet(parts[1..-1].join(" "))
-			  when 'dm' then dm(parts[1], parts[2..-1].joing(" "))
+			  when 'dm' then dm(parts[1], parts[2..-1].join(" "))
+			  when 'spam' then spam_my_followers(parts[1..-1].join(" "))
+			  when 'etl' then everyone_last_tweet
 			  else
 			  	puts "Sorry I dont know how to do #{command}"
 			end
